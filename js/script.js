@@ -7,16 +7,21 @@ const counterSet = ()=>{
     localStorage.setItem('counter',0);
 }
 
-const savedCounterValue = localStorage.getItem('counter');
-let savedCounterValueParsed = JSON.parse(savedCounterValue);
+const counterGet = ()=>{
+    const savedCounterValue = localStorage.getItem('counter');
+    let savedCounterValueParsed = JSON.parse(savedCounterValue);
+    return savedCounterValueParsed;
+}
+
+
 
 // ** Initial display
 
-if (savedCounterValueParsed > 0) {
-    document.getElementById('display').innerText = `${savedCounterValueParsed}`
+if (counterGet() > 0) {
+    document.getElementById('display').innerText = `${counterGet()}`
 } else{
     counterSet();
-    const savedValue = JSON.parse(localStorage.getItem('counter'));
+    const savedValue = counterGet()
     document.getElementById('display').innerText = `${savedValue}`
 }
 
@@ -25,12 +30,13 @@ if (savedCounterValueParsed > 0) {
 // ** counetr Increament
 
 const increament = ()=>{
-    ++savedCounterValueParsed;
+    let counter = counterGet()
+    ++counter;
     // ** display after increament
-    document.getElementById('display').innerText = `${savedCounterValueParsed}`
+    document.getElementById('display').innerText = `${counter}`
     // ** stringyfy the new increament value and set to the ls
     
-    const savedCounterValueStringyfy = JSON.stringify(savedCounterValueParsed);
+    const savedCounterValueStringyfy = JSON.stringify(counter);
 
     // ** set the value to ls
 
@@ -38,15 +44,16 @@ const increament = ()=>{
    
 }
 const decrement = ()=>{
-    --savedCounterValueParsed;
-    if(savedCounterValueParsed < 0){
+    let counter = counterGet()
+    --counter;
+    if(counter < 0){
         return
     }
     // ** display after decrement
-    document.getElementById('display').innerText = `${savedCounterValueParsed}`
+    document.getElementById('display').innerText = `${counter}`
     // ** stringyfy the new increament value and set to the ls
     
-    const savedCounterValueStringyfy = JSON.stringify(savedCounterValueParsed);
+    const savedCounterValueStringyfy = JSON.stringify(counter);
 
     // ** set the value to ls
 
